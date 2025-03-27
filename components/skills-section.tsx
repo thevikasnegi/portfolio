@@ -3,26 +3,27 @@
 import { motion } from "framer-motion";
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
-import { 
-  Code, 
-  Palette, 
-  Database, 
-  Globe, 
-  Layers, 
+import {
+  Code,
+  Palette,
+  Database,
+  Globe,
+  Layers,
   GitBranch,
-  Server
+  Server,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 
-const skills = [
-  { name: "JavaScript", percentage: 95 },
-  { name: "React", percentage: 95 },
-  { name: "Node.js", percentage: 95 },
-  { name: "TypeScript", percentage: 90 },
-  { name: "Golang", percentage: 70 },
-  { name: "Next.js", percentage: 85 },
-  { name: "AWS", percentage: 75 },
-  { name: "Django", percentage: 50 },
-];
+// const skills = [
+//   { name: "JavaScript", percentage: 95 },
+//   { name: "React", percentage: 95 },
+//   { name: "Node.js", percentage: 95 },
+//   { name: "TypeScript", percentage: 90 },
+//   { name: "Golang", percentage: 70 },
+//   { name: "Next.js", percentage: 85 },
+//   { name: "AWS", percentage: 75 },
+//   { name: "Django", percentage: 50 },
+// ];
 
 const categories = [
   {
@@ -56,7 +57,7 @@ const categories = [
       "Sequelize",
       "FASTAPI",
       "NextJS",
-      "Bun"
+      "Bun",
     ],
   },
   {
@@ -93,7 +94,7 @@ const categories = [
   {
     title: "Web Technologies",
     icon: <Globe className="h-10 w-10 text-primary" />,
-    skills: ["REST API", "GraphQL", "WebSockets", "PWA", "SEO", "gRPC",],
+    skills: ["REST API", "GraphQL", "WebSockets", "PWA", "SEO", "gRPC"],
   },
   {
     title: "Architecture",
@@ -110,6 +111,12 @@ const categories = [
 ];
 
 export default function SkillsSection() {
+  const [skills, setSkills] = useState<Record<string, string>[]>();
+  useEffect(() => {
+    fetch("/api/skills")
+      .then((res) => res.json())
+      .then(setSkills);
+  }, []);
   return (
     <section id="skills" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -123,12 +130,13 @@ export default function SkillsSection() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">My Skills</h2>
           <div className="h-1 w-20 bg-primary mx-auto mb-6"></div>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            I've developed a diverse set of skills throughout my career. Here's a breakdown of my technical expertise and proficiency levels.
+            I've developed a diverse set of skills throughout my career. Here's
+            a breakdown of my technical expertise and proficiency levels.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-20">
-          {skills.map((skill, index) => (
+          {(skills || []).map((skill, index) => (
             <motion.div
               key={skill.name}
               initial={{ opacity: 0, y: 20 }}
@@ -138,9 +146,11 @@ export default function SkillsSection() {
             >
               <div className="mb-2 flex justify-between items-center">
                 <h3 className="font-medium">{skill.name}</h3>
-                <span className="text-sm text-muted-foreground">{skill.percentage}%</span>
+                <span className="text-sm text-muted-foreground">
+                  {skill.level}%
+                </span>
               </div>
-              <Progress value={skill.percentage} className="h-2" />
+              <Progress value={parseInt(skill.level)} className="h-2" />
             </motion.div>
           ))}
         </div>
