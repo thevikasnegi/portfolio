@@ -89,7 +89,7 @@ export default function AboutSection() {
             <div className="flex flex-wrap gap-3">
               <Link
                 href={
-                  "https://drive.google.com/file/d/1BZmTCXn2LQ0OrgELVqmc-zCGVRTk-HBw/view?usp=drive_link"
+                  "https://drive.google.com/file/d/1C4LRBUzL7dLsvTAOyaM5p0f8azxXMLH5/view"
                 }
                 target="_blank"
               >

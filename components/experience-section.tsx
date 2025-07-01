@@ -74,7 +74,7 @@ const experiences = [
   },
   {
     id: 3,
-    role: "Technical Wrier Intern",
+    role: "Technical Writer Intern",
     company: "DiyanshIT",
     location: "Remote",
     period: "Feb 2023",
