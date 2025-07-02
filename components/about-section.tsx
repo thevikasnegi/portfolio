@@ -104,7 +104,7 @@ export default function AboutSection() {
               </Button>
               <Button variant="outline" size="icon">
                 <Link
-                  href={"https://github.com/the-predator072"}
+                  href={"https://github.com/thevikasnegi"}
                   target="_blank"
                 >
                   <Github size={18} />
